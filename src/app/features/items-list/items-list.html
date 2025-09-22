@@ -1,0 +1,12 @@
+<p>items-list works!</p>
+<section class="items">
+  <h2 class="items__title">Список курсів</h2>
+
+  <div class="items__grid">
+    <!-- цикл по масиву items -->
+    <app-item-card
+      *ngFor="let c of items"
+      [item]="c">
+    </app-item-card>
+  </div>
+</section>

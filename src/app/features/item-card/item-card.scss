@@ -1,0 +1,30 @@
+.card {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  display: grid;
+  gap: 8px;
+
+  &.featured { box-shadow: 0 0 0 2px #3b82f6 inset; }
+
+  &__header { display: flex; justify-content: space-between; align-items: center; }
+
+  &__title { margin: 0; font-size: 18px; font-weight: 600; }
+
+  &__level {
+    font-size: 12px; padding: 2px 6px;
+    border: 1px solid #9ca3af; border-radius: 999px; text-transform: capitalize;
+  }
+
+  &__desc { margin: 0; color: #374151; }
+
+  &__meta { margin: 0; padding-left: 16px; color: #6b7280; }
+
+  &__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag { font-size: 12px; background: #f3f4f6; border-radius: 999px; padding: 2px 8px; }
+
+  &__link { font-size: 14px; text-decoration: underline; color: #2563eb; }
+}
+ 

@@ -1,0 +1,27 @@
+<article class="card" [class.featured]="item.isFeatured">
+  <!-- Заголовок і рівень -->
+  <header class="card__header">
+    <h3 class="card__title">{{ item.title }}</h3>
+    <span class="card__level">{{ item.level }}</span>
+  </header>
+
+  <!-- Короткий опис -->
+  <p class="card__desc">{{ item.shortDescription }}</p>
+
+  <!-- Додаткова інформація -->
+  <ul class="card__meta">
+    <li>Мова: {{ item.language }}</li>
+    <li>Тривалість: {{ item.durationHours }} год</li>
+  </ul>
+
+  <!-- Теги -->
+  <div class="card__tags">
+    <span class="tag" *ngFor="let t of item.tags">{{ t }}</span>
+  </div>
+
+  <!-- Посилання  -->
+  <a *ngIf="item.link" class="card__link" [href]="item.link" target="_blank" rel="noopener">
+    Детальніше
+  </a>
+</article>
+ 
