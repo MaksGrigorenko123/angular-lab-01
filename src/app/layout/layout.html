@@ -1,4 +1,4 @@
-<!-- Крок 6: головний макет з хедером і футером -->
+<!-- Хедер -->
 <header class="header">
   <div class="container">
     <h1>{{ siteTitle }}</h1>
@@ -8,10 +8,15 @@
   </div>
 </header>
 
+<!-- Головний контент -->
 <main class="container">
   <p>Вітаю! Це стартовий макет Angular-застосунку.</p>
+
+  <!-- ✅ Селектор списку курсів -->
+  <app-items-list></app-items-list>
 </main>
 
+<!-- Футер -->
 <footer class="footer">
   <div class="container">
     <small>© {{ year }} • Розроблено: {{ designerName }}</small>

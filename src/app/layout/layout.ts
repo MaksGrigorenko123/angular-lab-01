@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { ItemsList } from '../features/items-list/items-list'; 
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './layout.html',        // было './layout.component.html' — ИСПРАВИЛИ
-  styleUrls: ['./layout.scss']         // было './layout.component.scss' — ИСПРАВИЛИ
+  standalone: true,
+  imports: [ItemsList], 
+  templateUrl: './layout.html',
+  styleUrls: ['./layout.scss']
 })
 export class LayoutComponent {
-  siteTitle: string = 'Проєкт 1';
+  siteTitle: string = 'Проект 1';
   year: number = new Date().getFullYear();
   designerName: string = 'Макс Григоренко ІТ-32/2';
 }
+ 
