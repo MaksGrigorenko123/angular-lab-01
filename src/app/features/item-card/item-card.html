@@ -1,0 +1,17 @@
+<div class="card">
+  <h3 class="card__title">{{ course.title }}</h3>
+
+  <p class="card__meta">
+    <strong>Рівень:</strong> {{ course.level }} |
+    <strong>Мова:</strong> {{ course.lang }} |
+    <strong>Тривалість:</strong> {{ course.duration }}
+  </p>
+
+  <p class="card__desc">{{ course.description }}</p>
+
+  <!-- Кнопка, яка тригерить вихідну подію -->
+  <button class="card__btn" type="button" (click)="onDetails()">
+    Детальніше
+  </button>
+</div>
+ 
