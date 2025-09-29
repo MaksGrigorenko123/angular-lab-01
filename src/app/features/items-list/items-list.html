@@ -1,0 +1,11 @@
+<section class="items">
+  <h2>Список курсів з програмування</h2>
+
+  <div class="items__grid">
+    <app-item-card
+      *ngFor="let c of items; trackBy: trackById"
+      [course]="c">
+    </app-item-card>
+  </div>
+</section>
+ 
