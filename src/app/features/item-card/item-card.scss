@@ -1,0 +1,25 @@
+.card {
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Позначка з Кроку 4 */
+.card__badge {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #ffeb3b;
+  color: #d32f2f;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* Кольорові теми від рівня (спрацьовують через [ngClass]) */
+.lvl-beginner  { background-image: linear-gradient(to right, rgba(76,175,80,.06), transparent); }
+.lvl-intermediate { background-image: linear-gradient(to right, rgba(255,152,0,.06), transparent); }
+.lvl-advanced  { background-image: linear-gradient(to right, rgba(244,67,54,.06), transparent); }
+ 
