@@ -1,0 +1,17 @@
+.items__search {
+  margin: 0 0 12px 0;
+
+  input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 8px;
+    outline: none;
+  }
+}
+.items__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+ 

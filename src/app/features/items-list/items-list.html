@@ -1,10 +1,19 @@
 <section class="items">
   <h2>Список курсів з програмування</h2>
 
+  <!-- Поле пошуку з двосторонньою прив’язкою -->
+  <div class="items__search">
+    <input
+      type="text"
+      placeholder="Пошук за назвою, мовою або тегом…"
+      [(ngModel)]="query" />
+  </div>
+
   <div class="items__grid">
     <app-item-card
-      *ngFor="let c of items; trackBy: trackById"
-      [course]="c">
+      *ngFor="let c of filtered; trackBy: trackById"
+      [course]="c"
+      (select)="onSelect($event)">
     </app-item-card>
   </div>
 </section>

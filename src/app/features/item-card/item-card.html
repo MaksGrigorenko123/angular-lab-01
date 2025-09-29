@@ -1,10 +1,5 @@
-<div class="card" [ngClass]="levelClasses" [ngStyle]="cardStyle">
+<div class="card">
   <h3 class="card__title">{{ course.title }}</h3>
-
-  <!-- Позначка з Кроку 4 -->
-  <span *ngIf="course.level === 'Beginner'" class="card__badge">
-    🔥 Популярний курс
-  </span>
 
   <p class="card__meta">
     <strong>Рівень:</strong> {{ course.level }} |
@@ -13,5 +8,10 @@
   </p>
 
   <p class="card__desc">{{ course.description }}</p>
+
+  <!-- Кнопка, яка тригерить вихідну подію -->
+  <button class="card__btn" type="button" (click)="onDetails()">
+    Детальніше
+  </button>
 </div>
  
