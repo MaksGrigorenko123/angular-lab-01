@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Список курсів з програмування</h2>
+
+  <input
+    type="text"
+    placeholder="Пошук за назвою, мовою або тегом..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <p>Кількість: {{ filtered.length }}</p>
+
+  <div class="cards">
+    <div class="card" *ngFor="let item of filtered">
+      <h3>{{ item.title }}</h3>
+      <p>
+        <strong>Рівень:</strong> {{ item.level }}
+        | <strong>Мова:</strong> {{ item.lang }}
+        | <strong>Тривалість:</strong> {{ item.duration }}
+      </p>
+      <p>{{ item.description }}</p>
+      <button (click)="showDetails(item)">Детальніше</button>
+    </div>
+  </div>
+</div>
+ 
