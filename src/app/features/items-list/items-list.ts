@@ -1,40 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+// src/app/features/items-list/items-list.ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';          // ✅ додано
+import { FormsModule } from '@angular/forms';
 import { DataService } from '../../shared/services/data.service';
 import { Course } from '../../shared/models/course.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-items-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],                 // ✅ додано FormsModule
+  imports: [CommonModule, FormsModule],
   templateUrl: './items-list.html',
   styleUrls: ['./items-list.scss'],
 })
-export class ItemsListComponent implements OnInit {
+export class ItemsListComponent implements OnInit, OnDestroy {
   items: Course[] = [];
-  searchTerm = '';                                      // ✅ поле для ngModel
+  searchTerm = '';
+
+  private destroy$ = new Subject<void>();
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.items = this.dataService.getItems();
+    this.dataService
+      .getItems()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => (this.items = items));
   }
 
-  // ✅ простий фільтр без пайпа
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // ✅ тепер просто повертаємо те, що прийшло із сервісу
   get filtered(): Course[] {
-    const q = this.searchTerm.trim().toLowerCase();
-    if (!q) return this.items;
-    return this.items.filter(c =>
-      c.title.toLowerCase().includes(q) ||
-      c.lang.toLowerCase().includes(q) ||
-      (c.tags ?? []).some(t => t.toLowerCase().includes(q))
-    );
+    return this.items;
   }
 
-  // ✅ обробник кнопки
+  // ✅ викликається при зміні значення у полі пошуку
+  onSearchChange(q: string): void {
+    this.dataService.filterByQuery(q);
+  }
+
   showDetails(item: Course): void {
-    console.log('Вибрано курс:', item);
     alert(`Курс: ${item.title}\nРівень: ${item.level}\nМова: ${item.lang}`);
   }
 }
