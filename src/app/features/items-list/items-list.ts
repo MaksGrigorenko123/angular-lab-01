@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';          // ✅ додано
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; // ✅ додано
 import { DataService } from '../../shared/services/data.service';
 import { Course } from '../../shared/models/course.model';
 
 @Component({
   selector: 'app-items-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],                 // ✅ додано FormsModule
+  imports: [CommonModule, FormsModule, RouterModule], // ✅ RouterModule додано
   templateUrl: './items-list.html',
   styleUrls: ['./items-list.scss'],
 })
 export class ItemsListComponent implements OnInit {
   items: Course[] = [];
-  searchTerm = '';                                      // ✅ поле для ngModel
+  searchTerm = ''; // ✅ поле для ngModel
 
   constructor(private dataService: DataService) {}
 
@@ -25,17 +26,12 @@ export class ItemsListComponent implements OnInit {
   get filtered(): Course[] {
     const q = this.searchTerm.trim().toLowerCase();
     if (!q) return this.items;
-    return this.items.filter(c =>
-      c.title.toLowerCase().includes(q) ||
-      c.lang.toLowerCase().includes(q) ||
-      (c.tags ?? []).some(t => t.toLowerCase().includes(q))
+    return this.items.filter(
+      (c) =>
+        c.title.toLowerCase().includes(q) ||
+        c.lang.toLowerCase().includes(q) ||
+        (c.tags ?? []).some((t) => t.toLowerCase().includes(q))
     );
-  }
-
-  // ✅ обробник кнопки
-  showDetails(item: Course): void {
-    console.log('Вибрано курс:', item);
-    alert(`Курс: ${item.title}\nРівень: ${item.level}\nМова: ${item.lang}`);
   }
 }
  

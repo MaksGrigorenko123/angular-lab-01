@@ -1,0 +1,25 @@
+<h2>Деталі курсу</h2>
+
+<p><a routerLink="/items">← Повернутися до списку</a></p>
+
+<div *ngIf="course; else notfound">
+  <h3>{{ course.title }}</h3>
+  <p>
+    <strong>Рівень:</strong> {{ course.level }}
+    | <strong>Мова:</strong> {{ course.lang }}
+    | <strong>Тривалість:</strong> {{ course.duration }}
+  </p>
+
+  <p *ngIf="course.description"><strong>Опис:</strong> {{ course.description }}</p>
+  <p *ngIf="course.tags && course.tags.length">
+    <strong>Теги:</strong> {{ course.tags.join(', ') }}
+  </p>
+  <p *ngIf="course.link">
+    <a [href]="course.link" target="_blank" rel="noopener">Офіційна сторінка</a>
+  </p>
+</div>
+
+<ng-template #notfound>
+  <p>Курс не знайдено. Спробуйте повернутися до <a routerLink="/items">списку</a>.</p>
+</ng-template>
+ 

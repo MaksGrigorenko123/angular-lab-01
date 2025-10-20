@@ -13,12 +13,13 @@
     <div class="card" *ngFor="let item of filtered">
       <h3>{{ item.title }}</h3>
       <p>
-        <strong>Рівень:</strong> {{ item.level }}
-        | <strong>Мова:</strong> {{ item.lang }}
-        | <strong>Тривалість:</strong> {{ item.duration }}
+        <strong>Рівень:</strong> {{ item.level }} |
+        <strong>Мова:</strong> {{ item.lang }} |
+        <strong>Тривалість:</strong> {{ item.duration }}
       </p>
       <p>{{ item.description }}</p>
-      <button (click)="showDetails(item)">Детальніше</button>
+
+      <a [routerLink]="['/items', item.id]" class="details-link">Детальніше</a>
     </div>
   </div>
 </div>
