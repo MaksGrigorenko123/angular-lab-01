@@ -1,43 +1,26 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil, switchMap } from 'rxjs';
-import { Course } from '../../shared/models/course.model';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, map, switchMap } from 'rxjs';
+
 import { DataService } from '../../shared/services/data.service';
+import { Course } from '../../shared/models/course.model';
 
 @Component({
   selector: 'app-item-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './item-details.html',
-  styleUrls: ['./item-details.scss'],
 })
-export class ItemDetailsComponent implements OnInit, OnDestroy {
-  course?: Course;
+export class ItemDetailsComponent {
+  private readonly route = inject(ActivatedRoute);
+  private readonly data  = inject(DataService);
 
-  private destroy$ = new Subject<void>();
-
-  constructor(
-    private route: ActivatedRoute,
-    private data: DataService
-  ) {}
-
-  ngOnInit(): void {
-    // читаємо :id з URL і підвантажуємо курс
-    this.route.paramMap
-      .pipe(
-        takeUntil(this.destroy$),
-        switchMap(params => {
-          const id = params.get('id')!;
-          return this.data.getItemById$(id);
-        })
-      )
-      .subscribe(course => (this.course = course ?? undefined));
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  // Было: map(... getItemById$(...)) => Observable<Observable<Course|undefined>>
+  // Стало: switchMap(...) => Observable<Course|undefined>
+  item$: Observable<Course | undefined> = this.route.paramMap.pipe(
+    map(params => Number(params.get('id'))),
+    switchMap(id => this.data.getItemById$(id))
+  );
 }
  

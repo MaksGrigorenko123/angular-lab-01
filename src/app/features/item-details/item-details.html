@@ -1,25 +1,30 @@
-<h2>Деталі курсу</h2>
+<ng-container *ngIf="item$ | async as c">
+  <section class="details">
+    <img
+      #img
+      [src]="$any(c)?.imageUrl ? $any(c).imageUrl : 'https://picsum.photos/seed/details/960/540'"
+      [alt]="$any(c)?.title || 'course image'"
+      (error)="img.src='https://picsum.photos/seed/fallback-details/960/540'"
+    />
 
-<p><a routerLink="/items">← Повернутися до списку</a></p>
+    <div class="details-body">
+      <h2 [textContent]="$any(c)?.title"></h2>
 
-<div *ngIf="course; else notfound">
-  <h3>{{ course.title }}</h3>
-  <p>
-    <strong>Рівень:</strong> {{ course.level }}
-    | <strong>Мова:</strong> {{ course.lang }}
-    | <strong>Тривалість:</strong> {{ course.duration }}
-  </p>
+      <div class="meta">
+        <span class="badge" [textContent]="$any(c)?.level"></span>
+        <span class="sep">·</span>
+        <span [textContent]="$any(c)?.lang"></span>
+        <span class="sep">·</span>
+        <span [textContent]="$any(c)?.duration"></span>
+      </div>
 
-  <p *ngIf="course.description"><strong>Опис:</strong> {{ course.description }}</p>
-  <p *ngIf="course.tags && course.tags.length">
-    <strong>Теги:</strong> {{ course.tags.join(', ') }}
-  </p>
-  <p *ngIf="course.link">
-    <a [href]="course.link" target="_blank" rel="noopener">Офіційна сторінка</a>
-  </p>
-</div>
+      <p *ngIf="$any(c)?.description" [textContent]="$any(c)?.description"></p>
 
-<ng-template #notfound>
-  <p>Курс не знайдено. Спробуйте повернутися до <a routerLink="/items">списку</a>.</p>
-</ng-template>
+      <div class="actions">
+        <a class="btn" routerLink="/items">Back to list</a>
+        <a class="btn ghost" *ngIf="$any(c)?.link" [href]="$any(c)?.link" target="_blank" rel="noreferrer">Docs</a>
+      </div>
+    </div>
+  </section>
+</ng-container>
  

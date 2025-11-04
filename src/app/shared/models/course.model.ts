@@ -7,5 +7,8 @@ export interface Course {
   description?: string;
   tags?: string[];
   link?: string;
+
+  /** image for cards and details */
+  imageUrl?: string;
 }
  
