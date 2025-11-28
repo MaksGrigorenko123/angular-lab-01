@@ -1,0 +1,30 @@
+<ng-container *ngIf="item$ | async as c">
+  <section class="details">
+    <img
+      #img
+      [src]="$any(c)?.imageUrl ? $any(c).imageUrl : 'https://picsum.photos/seed/details/960/540'"
+      [alt]="$any(c)?.title || 'course image'"
+      (error)="img.src='https://picsum.photos/seed/fallback-details/960/540'"
+    />
+
+    <div class="details-body">
+      <h2 [textContent]="$any(c)?.title"></h2>
+
+      <div class="meta">
+        <span class="badge" [textContent]="$any(c)?.level"></span>
+        <span class="sep">·</span>
+        <span [textContent]="$any(c)?.lang"></span>
+        <span class="sep">·</span>
+        <span [textContent]="$any(c)?.duration"></span>
+      </div>
+
+      <p *ngIf="$any(c)?.description" [textContent]="$any(c)?.description"></p>
+
+      <div class="actions">
+        <a class="btn" routerLink="/items">Back to list</a>
+        <a class="btn ghost" *ngIf="$any(c)?.link" [href]="$any(c)?.link" target="_blank" rel="noreferrer">Docs</a>
+      </div>
+    </div>
+  </section>
+</ng-container>
+ 

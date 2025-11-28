@@ -1,0 +1,50 @@
+<section>
+  <h2 style="margin:0 0 12px 2px;">All Courses</h2>
+
+  <input
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <div class="grid">
+
+    <ng-container *ngIf="items$ | async as items">
+
+      <article
+        class="card"
+        *ngFor="let c of filter(items, searchTerm)"
+        appHoverStyle
+      >
+        <img
+          class="card-img"
+          #img
+          [src]="c.imageUrl || 'https://picsum.photos/seed/placeholder/640/360'"
+          alt="{{ c.title }}"
+          (error)="img.src='https://picsum.photos/seed/fallback/640/360'"
+        />
+
+        <div class="card-body">
+          <h3 class="card-title">{{ c.title }}</h3>
+
+          <div class="meta">
+            <span class="badge">{{ c.level }}</span>
+            &nbsp;•&nbsp; {{ c.lang }}
+            &nbsp;•&nbsp; {{ c.duration }}
+          </div>
+
+          <p class="meta" *ngIf="c.description">
+            {{ c.description | truncate:140 }}
+          </p>
+
+          <div class="card-actions">
+            <a class="btn" [routerLink]="['/items', c.id]">Details</a>
+            <a class="btn ghost" *ngIf="c.link" [href]="c.link" target="_blank" rel="noreferrer">Docs</a>
+          </div>
+        </div>
+      </article>
+
+    </ng-container>
+
+  </div>
+</section>
