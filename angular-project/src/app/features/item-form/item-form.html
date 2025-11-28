@@ -1,0 +1,48 @@
+<div class="form">
+  <h2>Створити новий елемент</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <label>
+      Назва
+      <input formControlName="title">
+    </label>
+    <div class="error" *ngIf="form.controls.title.touched && form.controls.title.invalid">
+      Назва є обов'язковою
+    </div>
+
+    <label>
+      Категорія
+      <input formControlName="category">
+    </label>
+    <div class="error" *ngIf="form.controls.category.touched && form.controls.category.invalid">
+      Категорія є обов'язковою
+    </div>
+
+    <label>
+      Опис
+      <textarea formControlName="description"></textarea>
+    </label>
+    <div class="error" *ngIf="form.controls.description.touched && form.controls.description.invalid">
+      Мінімальна довжина — 10 символів
+    </div>
+
+    <label>
+      Тривалість
+      <input type="number" formControlName="duration">
+    </label>
+    <div class="error" *ngIf="form.controls.duration.touched && form.controls.duration.invalid">
+      Це поле є обов'язковим
+    </div>
+
+    <label>
+      Ціна
+      <input type="number" formControlName="price">
+    </label>
+    <div class="error" *ngIf="form.controls.price.touched && form.controls.price.invalid">
+      Це поле є обов'язковим
+    </div>
+
+    <button [disabled]="form.invalid">Створити</button>
+  </form>
+</div>

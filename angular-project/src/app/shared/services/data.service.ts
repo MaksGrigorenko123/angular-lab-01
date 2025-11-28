@@ -19,4 +19,11 @@ export class DataService {
     const nid = Number(id);
     return of(COURSES.find(c => c.id === nid));
   }
+  addItem(item: any) {
+    const newItem = {
+      id: Date.now(),
+      ...item
+    };
+    COURSES.push(newItem);
+  }
 }

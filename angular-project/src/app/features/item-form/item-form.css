@@ -1,0 +1,28 @@
+.form {
+  max-width: 450px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .error {
+    color: red;
+    font-size: 13px;
+    margin-top: -12px;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 8px;
+    background: #1976d2;
+    color: white;
+    cursor: pointer;
+  }
+}
